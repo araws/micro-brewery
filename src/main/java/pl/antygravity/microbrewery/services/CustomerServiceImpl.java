@@ -20,4 +20,9 @@ public class CustomerServiceImpl implements CustomerService {
                 .id(UUID.randomUUID())
                 .build();
     }
+
+    @Override
+    public void updateCustomer(UUID customerId, CustomerDto customerDto) {
+        //todo impl - would add a real impl to update customer
+    }
 }
