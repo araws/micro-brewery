@@ -9,6 +9,7 @@ import pl.antygravity.microbrewery.web.model.BeerDto;
 
 import java.util.UUID;
 
+@Deprecated
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
