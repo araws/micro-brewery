@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.antygravity.microbrewery.services.v2.BeerServiceV2;
 import pl.antygravity.microbrewery.web.model.V2.BeerDtoV2;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Validated
@@ -55,15 +52,4 @@ public class BeerControllerV2 {
     public void deleteBeer(@PathVariable("beerId") UUID beerId) {
         beerServiceV2.deleteById(beerId);
     }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List> validationErrorHandler(ConstraintViolationException exception) {
-        List<String> errors = new ArrayList<>(exception.getConstraintViolations().size());
-        exception.getConstraintViolations().forEach(constraintViolation -> {
-            errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
-        });
-
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
-
 }

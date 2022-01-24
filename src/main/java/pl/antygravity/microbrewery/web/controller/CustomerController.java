@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.antygravity.microbrewery.services.CustomerService;
 import pl.antygravity.microbrewery.web.model.CustomerDto;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/customer")
@@ -50,15 +47,5 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCustomer(@PathVariable("customerId") UUID customerId) {
         customerService.deleteById(customerId);
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List> validationErrorHandler(ConstraintViolationException exception){
-        List<String> errors = new ArrayList<>(exception.getConstraintViolations().size());
-        exception.getConstraintViolations().forEach(constraintViolation -> {
-            errors.add(constraintViolation.getPropertyPath() + " : " + constraintViolation.getMessage());
-        });
-
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
