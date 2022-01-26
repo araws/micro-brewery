@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import pl.antygravity.microbrewery.domain.Beer;
 import pl.antygravity.microbrewery.web.model.BeerDto;
 
-@Mapper
+@Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
 
     BeerDto beerToBeerDto(Beer beer);
